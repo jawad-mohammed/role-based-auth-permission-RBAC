@@ -15,6 +15,17 @@ router.get('/api/v1/get',async(req,res)=>{
     res.json(getAllUsers.rows)
 })
 
+//get otp numb
+router.post('/api/v1/otp',async(req,res)=>{
+  const otpNum=   Math.floor(100000 + Math.random() * 900000);  
+
+  res.json(otpNum)
+  
+})
+
+
+
+
 
 //post implementing jwt token register new user
 router.post('/post',async(req,res)=>{
