@@ -27,7 +27,10 @@ router.post('/api/v1/otp',async(req,res)=>{
 
 
 
-//post implementing jwt token register new user
+
+
+
+//post implementing jwt token register **************New user*************
 router.post('/post',async(req,res)=>{
 //verify customer exists in database
 const verifyUser = await pool.query(`select * from customerdetailslogin where email = $1 `,[req.body.Email])
@@ -46,6 +49,7 @@ const jwtToken = jwtAuth(newUser.rows[0].user_id)
   res.status(201).json({jwtToken})
 console.log(req.body);
 console.log(jwtToken);
+
 
 })
 //login route
@@ -69,9 +73,21 @@ if(!loginUser) {
 const jwtToken = jwtAuth(verifyUser.rows[0].user_id)
 res.json({jwtToken,message:` Welcome ${req.body.Email}`})
 
-
+router.get('/api/v1/:id',async(req,res)=>{
+  const {id} = req.params;
+const getPersonDetails = await pool.query(`select * from customerdetailslogin where customerid =$1`,[id]);
+res.json(getPersonDetails.rows);
 })
 
+
+
+})
+//gettin indiuvidual details from database
+// router.get('/api/v1/:id',async(req,res)=>{
+//   const {id} = req.params;
+// const getPersonDetails = await pool.query(`select * from customerdetailslogin where customerid =$1`,[id]);
+// res.json(getPersonDetails.rows);
+// })
 
 
 

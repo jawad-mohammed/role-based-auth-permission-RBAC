@@ -9,7 +9,7 @@ app.use(cors())
 //route
 app.use('/routes',require('./controller/routes'))
 app.use('/protectedroutes',require('./controller/protectedRoutes'))
-
+app.use('/products',require('./controller/productRoutes'))
 
 
 
